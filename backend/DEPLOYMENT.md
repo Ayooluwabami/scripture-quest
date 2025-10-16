@@ -47,7 +47,7 @@ NODE_ENV=development
 PORT=3000
 
 # Database
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/scripture-quest
+MONGODB_URI=
 
 # JWT
 JWT_SECRET=your-super-secret-jwt-key-min-32-characters
@@ -134,7 +134,7 @@ docker run -d \
 Create `.env.production` for production deployment:
 ```env
 NODE_ENV=production
-MONGODB_URI=mongodb+srv://prod-user:password@prod-cluster.mongodb.net/scripture-quest
+MONGODB_URI=
 JWT_SECRET=production-jwt-secret-key
 SESSION_SECRET=production-session-secret-key
 CORS_ORIGIN=https://scripturequest.com

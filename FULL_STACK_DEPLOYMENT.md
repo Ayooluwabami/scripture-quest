@@ -61,7 +61,7 @@ cp .env.example .env
 ```env
 NODE_ENV=development
 PORT=3000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/scripture-quest
+MONGODB_URI=
 JWT_SECRET=your-super-secret-jwt-key-min-32-characters
 SESSION_SECRET=your-super-secret-session-key-min-32-characters
 CORS_ORIGIN=http://localhost:8081
