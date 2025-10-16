@@ -1,0 +1,231 @@
+# Scripture Quest - Project Structure
+
+## Root Directory Structure
+```
+scripture-quest/
+├── backend/                 # Node.js/Express backend
+├── frontend/               # React Native frontend  
+├── README.md              # Project overview and setup
+├── project-structure.txt  # This file
+└── .gitignore            # Git ignore rules
+```
+
+## Backend Structure (/backend)
+```
+backend/
+├── src/
+│   ├── controllers/       # Request handlers and business logic
+│   │   ├── authController.ts      # Authentication (login, register, oauth)
+│   │   ├── userController.ts      # User management and profiles
+│   │   ├── gameController.ts      # Game management and logic
+│   │   ├── questionController.ts  # Question CRUD operations
+│   │   ├── levelController.ts     # Level and journey management
+│   │   ├── progressController.ts  # User progress tracking
+│   │   └── communityController.ts # Forums and social features
+│   │
+│   ├── models/           # Mongoose schemas and data models
+│   │   ├── User.ts       # User schema with progress, badges, roles
+│   │   ├── Game.ts       # Game types and configurations
+│   │   ├── Question.ts   # Question schema with multiple types
+│   │   ├── Level.ts      # Journey levels and progression
+│   │   ├── Progress.ts   # User progress tracking
+│   │   └── Community.ts  # Forum posts and social content
+│   │
+│   ├── routes/           # Express route definitions
+│   │   ├── auth.ts       # /api/v1/auth routes
+│   │   ├── users.ts      # /api/v1/users routes
+│   │   ├── games.ts      # /api/v1/games routes
+│   │   ├── questions.ts  # /api/v1/questions routes
+│   │   ├── levels.ts     # /api/v1/levels routes
+│   │   ├── progress.ts   # /api/v1/progress routes
+│   │   └── community.ts  # /api/v1/community routes
+│   │
+│   ├── services/         # Business logic and external integrations
+│   │   ├── authService.ts     # JWT, OAuth, password hashing
+│   │   ├── gameService.ts     # Game logic and scoring
+│   │   ├── progressService.ts # Progress calculation and tracking
+│   │   ├── bibleService.ts    # Bible API integration
+│   │   ├── socketService.ts   # Real-time multiplayer logic
+│   │   └── emailService.ts    # Email notifications
+│   │
+│   ├── middleware/       # Express middleware functions
+│   │   ├── auth.ts       # JWT verification and role checking
+│   │   ├── validation.ts # Zod schema validation
+│   │   ├── rateLimiter.ts # Rate limiting implementation
+│   │   ├── errorHandler.ts # Global error handling
+│   │   ├── logger.ts     # Request logging with Morgan
+│   │   └── cors.ts       # CORS configuration
+│   │
+│   ├── config/           # Configuration files
+│   │   ├── database.ts   # MongoDB connection setup
+│   │   ├── env.config.ts # Environment variable validation
+│   │   ├── swagger.ts    # API documentation setup
+│   │   └── socket.ts     # Socket.IO configuration
+│   │
+│   ├── utils/            # Utility functions and helpers
+│   │   ├── constants.ts  # Application constants
+│   │   ├── validators.ts # Zod validation schemas
+│   │   ├── helpers.ts    # Common utility functions
+│   │   └── types.ts      # TypeScript type definitions
+│   │
+│   └── app.ts            # Express app setup and configuration
+│
+├── tests/                # Test files
+│   ├── unit/            # Unit tests for services and utils
+│   ├── integration/     # API endpoint integration tests
+│   └── fixtures/        # Test data and mocks
+│
+├── package.json         # Dependencies and scripts
+├── tsconfig.json       # TypeScript configuration
+├── jest.config.js      # Jest testing configuration
+├── .env.example        # Environment variables template
+└── server.ts           # Application entry point
+```
+
+## Frontend Structure (/frontend)
+```
+frontend/
+├── app/                 # Expo Router app directory
+│   ├── (tabs)/         # Tab-based navigation
+│   │   ├── index.tsx   # Home screen
+│   │   ├── games.tsx   # Game selection
+│   │   ├── community.tsx # Community forums
+│   │   └── profile.tsx # User profile
+│   │
+│   ├── game/           # Game screens
+│   │   ├── [gameId].tsx    # Dynamic game player
+│   │   ├── rescue.tsx      # Rescue Mission game
+│   │   ├── quiz.tsx        # Bible Quiz game
+│   │   ├── memory.tsx      # Memory Verse game
+│   │   └── multiplayer.tsx # Multiplayer lobby
+│   │
+│   ├── auth/           # Authentication screens
+│   │   ├── login.tsx   # Login screen
+│   │   ├── register.tsx # Registration screen
+│   │   └── forgot.tsx  # Password reset
+│   │
+│   └── _layout.tsx     # Root layout
+│
+├── src/
+│   ├── components/     # Reusable UI components
+│   │   ├── ui/         # Basic UI components
+│   │   │   ├── Button.tsx     # Custom button component
+│   │   │   ├── Card.tsx       # Game card component
+│   │   │   ├── Input.tsx      # Form input component
+│   │   │   └── Modal.tsx      # Modal dialog component
+│   │   │
+│   │   ├── game/       # Game-specific components
+│   │   │   ├── QuizCard.tsx       # Quiz question display
+│   │   │   ├── VerseInput.tsx     # Verse completion input
+│   │   │   ├── ScoreBoard.tsx     # Score display
+│   │   │   ├── Timer.tsx          # Game timer
+│   │   │   └── ProgressBar.tsx    # Progress indicator
+│   │   │
+│   │   ├── community/  # Community components
+│   │   │   ├── ForumPost.tsx      # Forum post display
+│   │   │   ├── VerseCard.tsx      # Shareable verse cards
+│   │   │   └── UserAvatar.tsx     # User profile avatar
+│   │   │
+│   │   └── navigation/ # Navigation components
+│   │       ├── TabBar.tsx         # Custom tab bar
+│   │       └── Header.tsx         # Screen headers
+│   │
+│   ├── store/          # Redux Toolkit state management
+│   │   ├── slices/     # Redux slices
+│   │   │   ├── authSlice.ts       # Authentication state
+│   │   │   ├── gameSlice.ts       # Game state and progress
+│   │   │   ├── userSlice.ts       # User profile and settings
+│   │   │   └── communitySlice.ts  # Community and social state
+│   │   │
+│   │   ├── api/        # RTK Query API definitions
+│   │   │   ├── authApi.ts         # Authentication API
+│   │   │   ├── gameApi.ts         # Game data API
+│   │   │   ├── userApi.ts         # User management API
+│   │   │   └── communityApi.ts    # Community API
+│   │   │
+│   │   └── index.ts    # Store configuration
+│   │
+│   ├── services/       # External service integrations
+│   │   ├── api.ts      # Base API client configuration
+│   │   ├── socket.ts   # Socket.IO client setup
+│   │   ├── bible.ts    # Bible API integration
+│   │   └── storage.ts  # Local storage management
+│   │
+│   ├── utils/          # Utility functions and helpers
+│   │   ├── constants.ts    # App constants and enums
+│   │   ├── validators.ts   # Form validation functions
+│   │   ├── formatters.ts   # Data formatting utilities
+│   │   ├── gameLogic.ts    # Client-side game logic
+│   │   └── permissions.ts  # App permissions handling
+│   │
+│   ├── hooks/          # Custom React hooks
+│   │   ├── useAuth.ts      # Authentication hook
+│   │   ├── useGame.ts      # Game state management
+│   │   ├── useSocket.ts    # Socket.IO connection hook
+│   │   └── useOffline.ts   # Offline mode handling
+│   │
+│   ├── types/          # TypeScript type definitions
+│   │   ├── api.ts      # API response types
+│   │   ├── game.ts     # Game-related types
+│   │   ├── user.ts     # User and profile types
+│   │   └── community.ts # Community feature types
+│   │
+│   └── assets/         # Static assets
+│       ├── images/     # Game images and icons
+│       ├── sounds/     # Audio files for games
+│       └── fonts/      # Custom fonts
+│
+├── tests/              # Test files
+│   ├── __tests__/      # Component and hook tests
+│   ├── e2e/           # End-to-end tests with Detox
+│   └── __mocks__/     # Test mocks and fixtures
+│
+├── package.json       # Dependencies and scripts
+├── tsconfig.json     # TypeScript configuration
+├── app.json          # Expo configuration
+├── babel.config.js   # Babel configuration
+└── jest.config.js    # Jest testing configuration
+```
+
+## Naming Conventions
+
+### Files and Directories
+- **camelCase**: For files and variables (userController.ts, gameService.ts)
+- **PascalCase**: For React components and TypeScript interfaces (GameCard.tsx, User.ts)
+- **kebab-case**: For route parameters and URL segments (/api/v1/users/:user-id)
+
+### Code Style
+- **camelCase**: Variables, functions, and methods
+- **PascalCase**: Classes, interfaces, types, and React components
+- **UPPER_SNAKE_CASE**: Constants and environment variables
+- **Descriptive names**: Use clear, meaningful names for better code readability
+
+### Database Conventions
+- **camelCase**: Field names in MongoDB documents
+- **PascalCase**: Mongoose model names
+- **Singular**: Model names (User, Game, not Users, Games)
+
+### API Conventions
+- **Plural nouns**: Resource endpoints (/users, /games, /questions)
+- **HTTP verbs**: Use appropriate HTTP methods (GET, POST, PUT, DELETE)
+- **Versioning**: Include version in URL (/api/v1/)
+- **camelCase**: JSON property names in requests and responses
+
+## File Organization Principles
+
+### Separation of Concerns
+- Controllers handle HTTP requests/responses
+- Services contain business logic
+- Models define data structure
+- Middleware handles cross-cutting concerns
+
+### Feature-Based Organization
+- Group related functionality together
+- Keep components close to where they're used
+- Minimize deep nesting (max 3-4 levels)
+
+### Scalability
+- Each file focuses on a single responsibility
+- Modular architecture allows easy feature additions
+- Clear import/export patterns
+- Consistent file naming and structure
